@@ -27,12 +27,15 @@ $items = $itemsQuery->rowCount() ? $itemsQuery : [];
 	<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
 	<link rel="stylesheet" href="css/main.css">
 
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="js/script.js"></script>
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <body>
 	<div class="list">
-		<h1 class="header">To do.</h1>
+		<h1 class="header">To do:</h1>
 
 		<?php if(!empty($items)):?>
 
@@ -43,7 +46,7 @@ $items = $itemsQuery->rowCount() ? $itemsQuery : [];
 					<?php if(!$item['done']): ?>
 						<a href="mark.php?as=done&item=<?php echo $item['id']?>" class="done-button">Done</a>
 					<?php else: ?>
-						<a href="mark.php?as=notdone&item=<?php echo $item['id']?>" class="done-button">Not Done</a>
+						<a href="mark.php?as=notdone&item=<?php echo $item['id']?>" class="done-button">TO DO</a>
 					<?php endif; ?>
 				</li>
 			<?php endforeach ?>
@@ -57,6 +60,21 @@ $items = $itemsQuery->rowCount() ? $itemsQuery : [];
 			<input type="text" name="name" placeholder="Type a new item" class="input" autocomplete="off" required>
 			<input type="submit" value="Add" class="submit">	
 		</form>
+
+		<form class="item-mark" action="markAll.php" method="post" >
+			<input type="submit" value="Mark all as done" class="mark" name="mark-all">
+			<input type="submit" value="Mark all as TO DO" class="mark" name="unmark-all">
+		</form>
+
+		<form class="item-delete" action="delete.php" method="post">
+			<p class="question">Do you want to delete all done tasks?
+				<input type="checkbox" id="check-yes" name="check-yes" value="yes">
+				<label for="check-yes">YES</label>
+			</p>
+			<input type="submit" value="Delete" class="delete-done visible">
+		</form>
+
+		
 
 	</div>
 </body>

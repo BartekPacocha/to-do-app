@@ -19,7 +19,7 @@ a {
 	width: 100%;
 	max-width: 500px;
 	padding: 20px;
-	border-radius: 2px;
+	border-radius: 8px;
 	box-shadow: 3px 3px 0 rgba()0, 0, 0, .1;
 	box-sizing:border-box; 
 }
@@ -81,4 +81,46 @@ a {
 	width: 100%;
 	margin-top: 10px;
 	box-shadow: 3px 3px 0 #ddd;
+}
+
+/* Mark button*/
+
+.mark {
+	background-color: #fff;
+	padding: 5px 10px;
+	border: 1px solid #ddd;
+	width: 100%;
+	margin-top: 5px;
+	box-shadow: 3px 3px 0 #ddd;
+}
+
+/* delete question */
+
+.question {
+	text-align: center;
+	margin-top: 25px;
+	margin-bottom: 15px;
+}
+
+.question input[type=checkbox] + label {
+	color: #ccc;
+}
+
+.question input[type=checkbox]:checked + label {
+	color: #f00;
+}
+
+/* Delete done button */
+
+.delete-done {
+	background-color: #fff;
+	padding: 5px 10px;
+	border: 1px solid #ddd;
+	width: 100%;
+	margin-top: 5px;
+	box-shadow: 3px 3px 0 #ddd;
+}
+
+.visible {
+	visibility: hidden;
 }

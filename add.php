@@ -18,8 +18,8 @@ if(isset($_POST['name'])) {
 			'user' => $_SESSION['user_id']
 		]);
 	}
-} else {
-	echo 'brak name';
-}
+} 
+
+
 
 header('Location: index.php');
