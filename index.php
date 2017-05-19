@@ -1,20 +1,11 @@
 <?php
 	require_once 'app/init.php';
-
-	$itemsQuery = $db->prepare("
-		SELECT id, name, done
-		FROM items
-		WHERE user = :user
-");
-
-$itemsQuery->execute([
-	'user' => $_SESSION['user_id']
-]);
-
-$items = $itemsQuery->rowCount() ? $itemsQuery : [];
-
-
-
+	
+	if (isset($_GET['i'])) {
+		$info = $_GET['i'];
+	} else {
+		$info = null;
+	}
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +25,40 @@ $items = $itemsQuery->rowCount() ? $itemsQuery : [];
 
 </head>
 <body>
+
+<!-- Form when logged -->
+
+<?php 
+	if(isset($_SESSION['user_id'])):
+
+
+	$itemsQuery = $db->prepare("
+		SELECT id, name, done
+		FROM items
+		WHERE user = :user
+	");
+
+$itemsQuery->execute([
+	'user' => $_SESSION['user_id']
+]);
+
+$items = $itemsQuery->rowCount() ? $itemsQuery : [];
+
+?>
+
 	<div class="list">
+
+	<div class="panel">
+		<div class="panel-name">
+			<h3 id="name">Hello, <?php echo $_SESSION['username']; ?></h3>
+		</div>
+		<div class="panel-logout">
+			<form action="logout.php" method="post">
+				<input type="submit" class="panel-submit" value="Logout">
+			</form>
+		</div>
+		
+	</div>
 		<h1 class="header">To do:</h1>
 
 		<?php if(!empty($items)):?>
@@ -74,8 +98,52 @@ $items = $itemsQuery->rowCount() ? $itemsQuery : [];
 			<input type="submit" value="Delete" class="delete-done visible">
 		</form>
 
+	</div>
+
+<!-- Form when not logged -->
+
+<?php else: ?>
+
+<div class="login">
+		<h1 class="header">Sign In:</h1>
+		
+		<form class="item-login" action="login.php" method="post" >
+			<h3>Login: </h3> 
+				<input type="text" class="input" name="login-input" placeholder="<?php
+					if ($info == 'login') {
+						echo 'incorrect login';
+					}
+				 ?>">
+			<h3>Password:</h3> 
+				<input type="password" class="input input-password" name="password" placeholder="<?php
+					if ($info == 'haslo') {
+						echo 'incorrect password';
+					}
+				 ?>">
+				<input type="submit" value="Login" class="submit" name="login">
+		</form>
+
+		<p class="question">Want to register?
+			<input type="checkbox" id="check-yes" name="check-yes" value="yes">
+			<label for="check-yes">YES</label>
+		</p>
+				
+
+		<form class="item-register visible" action="register.php" method="post">
+			<h3>Login: </h3> 
+				<input type="text" class="input" name="login-input">
+			<h3>E-mail:</h3>
+				<input type="email" class="input" name="email">
+			<h3>Password:</h3> 
+				<input type="password" class="input" name="password">
+			<input type="submit" value="Register" class="delete-done" name="register">
+		</form>
 		
 
-	</div>
+</div>
+
+
+<?php endif; ?>
+
 </body>
 </html>
