@@ -6,6 +6,7 @@ require_once 'app/init.php';
 
 if(isset($_POST['name'])) {
 	$name = trim($_POST['name']);
+	$group = $_POST['groups'];
 
 	if(!empty($name)) {
 		$addedQuery = $db->prepare("
@@ -16,6 +17,7 @@ if(isset($_POST['name'])) {
 		$addedQuery->execute([
 			'name' => $name,
 			'user' => $_SESSION['user_id']
+			//'group' => $group
 		]);
 	}
 } 

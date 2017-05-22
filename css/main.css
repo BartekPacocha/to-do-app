@@ -70,6 +70,8 @@ a {
 	padding: 3px 6px;
 	border: 0;
 	opacity: 0.4;
+	float: right;
+	margin-right: 15px;
 }
 
 /* Submit button */
@@ -184,4 +186,8 @@ input[type="email"] {
 	border: 1px solid #ddd;
 	margin-top: 10px;
 	box-shadow: 3px 3px 0 #ddd;
+}
+
+.browse input {
+	float: left;
 }

@@ -59,6 +59,7 @@ $items = $itemsQuery->rowCount() ? $itemsQuery : [];
 		</div>
 		
 	</div>
+
 		<h1 class="header">To do:</h1>
 
 		<?php if(!empty($items)):?>
@@ -82,6 +83,15 @@ $items = $itemsQuery->rowCount() ? $itemsQuery : [];
 
 		<form class="item-add" action="add.php" method="post">
 			<input type="text" name="name" placeholder="Type a new item" class="input" autocomplete="off" required>
+			
+<!--
+			<select name="groups" id="groups-select">
+				<option value="Shopping">Shopping</option>
+				<option value="School">School</option>
+				<option value="Private">Private</option>
+			</select>
+-->
+
 			<input type="submit" value="Add" class="submit">	
 		</form>
 
